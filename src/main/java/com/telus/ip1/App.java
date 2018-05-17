@@ -23,17 +23,19 @@ public class App
     public static void main( String[] args )
     {
 
-        final String bearerToken = getBearerToken();
-        final String userName = "ronald_mackay";
-        final int count = 10;
-        final String apiUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        final String bearerToken = getBearerToken(); // este token no debe cambiar
+        final String userName = "ronald_mackay"; // se le debe pedir al usuario este valor
+        final int count = 10; // se le debe pedir al usuario este valor
+        final String textToFind = "a";
+
+        final String apiUrl = ""; // colocar aqui url de api de get status, leer: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline.html
         final String response = getTwittsFromApi(apiUrl, bearerToken, userName, count);
-        final String textToSearch = "a";
+
 
          // Leemos respuesta de twitter y la procesamos para crear objetos json en base a su estructura, completar
         JSONArray jsonArray = new JSONArray(response);
         // completar lo siguiente
-        printResults(textToSearch, jsonArray);  // completar el metodo de la impresion
+        printResults(textToFind, jsonArray);  // completar el metodo de la impresion
     }
 
     private static String getBearerToken() {
@@ -41,14 +43,14 @@ public class App
     }
 
 
-    private static void printResults(String textToSearch, JSONArray array) {
-        for(int i = 0; i < array.length(); i++) {
-            JSONObject jsonObject = array.getJSONObject(i);
-            String text = (String) jsonObject.get("text");
-            System.out.println("Texto en indice " + i + ":");
-            System.out.println(text);
-            System.out.println("------");
-        }
+    private static void printResults(String textToFind, JSONArray array) {
+        // completar aca funcionalidad para buscar texto, lo que esta a continuacion es codigo de prueba, usarla como base
+        JSONObject jsonObject = array.getJSONObject(0);
+        String text = (String) jsonObject.get("text");
+        System.out.println("Texto en indice " + 0 + ":");
+        System.out.println(text);
+        System.out.println("------");
+
     }
 
     private static String getTwittsFromApi(final String apiUrl, final String bearerToken, final String userName, final int count) {
